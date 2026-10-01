@@ -1,0 +1,22 @@
+contrast,metric,diff,ci_lo,ci_hi,verdict
+All starts − Relief,(a) Putaway%,-3.4,-14.3,4.0,Inconclusive
+All starts − Relief,(a) 2K whiff% [stuff],1.5,-15.1,14.0,Stuff not shown to decline
+All starts − Relief,(b) Expansion gap (pts),-1.8,-17.7,11.4,
+All starts − Relief,(c-i) Waste share,-8.7,-26.8,4.0,Inconclusive
+All starts − Relief,(c-ii) Chase rate,-6.0,-27.0,12.3,No stuff signal
+All starts − Relief,(d) 2K walk rate,4.6,-2.8,12.4,Inconclusive
+All starts − Relief,(d) Overall BB%,2.3,-6.2,10.2,
+Fresh − Relief (role),(a) Putaway%,1.5,-11.5,13.2,
+Fresh − Relief (role),(a) 2K whiff% [stuff],9.9,-9.5,27.8,
+Fresh − Relief (role),(b) Expansion gap (pts),9.4,-10.3,25.9,
+Fresh − Relief (role),(c-i) Waste share,-17.3,-36.2,-2.6,
+Fresh − Relief (role),(c-ii) Chase rate,-7.7,-31.7,15.3,
+Fresh − Relief (role),(d) 2K walk rate,4.7,-6.1,17.0,
+Fresh − Relief (role),(d) Overall BB%,1.1,-9.0,11.9,
+Rest − Fresh (fatigue),(a) Putaway%,-5.2,-13.9,2.3,
+Rest − Fresh (fatigue),(a) 2K whiff% [stuff],-9.0,-21.7,2.4,
+Rest − Fresh (fatigue),(b) Expansion gap (pts),-13.0,-23.8,0.2,
+Rest − Fresh (fatigue),(c-i) Waste share,9.9,0.6,17.7,
+Rest − Fresh (fatigue),(c-ii) Chase rate,3.1,-13.4,16.8,
+Rest − Fresh (fatigue),(d) 2K walk rate,0.1,-10.4,9.1,
+Rest − Fresh (fatigue),(d) Overall BB%,1.9,-6.2,7.9,
