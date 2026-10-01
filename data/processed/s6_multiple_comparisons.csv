@@ -1,0 +1,51 @@
+family,test,p_boot,claimed,holm_reject,tests_in_family
+S2 / H1,(a) Putaway%,0.4052,False,False,7
+S2 / H1,(a) 2K whiff% [stuff],0.778,False,False,7
+S2 / H1,(c-i) Waste share,0.1657989587505006,False,False,7
+S2 / H1,(c-ii) Chase rate,0.4749116607773851,False,False,7
+S2 / H1,(d) 2K walk rate,0.1992,False,False,7
+S2 / H1,(b) expansion gap > 0 in starts,0.0001,True,True,7
+S2 / H1,(e) BB% bad − good starts,0.252,False,False,7
+S1 / H3-H4,FF: 2026 start − 2025 start — velo,0.0001,True,True,31
+S1 / H3-H4,FF: 2026 start − 2025 start — IVB,0.0001,False,True,31
+S1 / H3-H4,FF: 2026 start − 2025 start — HB,0.0136,False,False,31
+S1 / H3-H4,FF: 2026 start − 2025 start — whiff,0.0164,False,False,31
+S1 / H3-H4,FF: 2026 start − 2025 start — chase,0.0056005600560056,True,False,31
+S1 / H3-H4,FF: 2025 relief − 2025 start — velo,0.0001,True,True,31
+S1 / H3-H4,FF: 2025 relief − 2025 start — IVB,0.0026,False,True,31
+S1 / H3-H4,FF: 2025 relief − 2025 start — HB,0.13,False,False,31
+S1 / H3-H4,FF: 2025 relief − 2025 start — whiff,0.148,False,False,31
+S1 / H3-H4,FF: 2025 relief − 2025 start — chase,0.1184118411841184,False,False,31
+S1 / H3-H4,FF: 2026 relief − 2026 start — velo,0.0001,True,True,31
+S1 / H3-H4,FF: 2026 relief − 2026 start — IVB,0.2274,False,False,31
+S1 / H3-H4,FF: 2026 relief − 2026 start — HB,0.1418,False,False,31
+S1 / H3-H4,FF: 2026 relief − 2026 start — whiff,0.7446166649329033,False,False,31
+S1 / H3-H4,FF: 2026 relief − 2026 start — chase,0.005049005049005,True,False,31
+S1 / H3-H4,FO: 2025 relief − 2025 start — velo,0.0012,True,True,31
+S1 / H3-H4,FO: 2025 relief − 2025 start — IVB,0.5586,False,False,31
+S1 / H3-H4,FO: 2025 relief − 2025 start — HB,0.0001,True,True,31
+S1 / H3-H4,FO: 2025 relief − 2025 start — whiff,0.0204040808161632,True,False,31
+S1 / H3-H4,FO: 2025 relief − 2025 start — chase,0.1334,False,False,31
+S1 / H3-H4,FS: 2026 relief − 2026 start — velo,0.0004,True,True,31
+S1 / H3-H4,FS: 2026 relief − 2026 start — IVB,0.0001,True,True,31
+S1 / H3-H4,FS: 2026 relief − 2026 start — HB,0.5586,False,False,31
+S1 / H3-H4,FS: 2026 relief − 2026 start — chase,0.0001416029453412,True,True,31
+S1 / H3-H4,Splitter change: 2026 FS − 2025 FO (starts) — velo,0.0001,True,True,31
+S1 / H3-H4,Splitter change: 2026 FS − 2025 FO (starts) — IVB,0.0001,True,True,31
+S1 / H3-H4,Splitter change: 2026 FS − 2025 FO (starts) — HB,0.0001,True,True,31
+S1 / H3-H4,Splitter change: 2026 FS − 2025 FO (starts) — whiff,0.8734,False,False,31
+S1 / H3-H4,Splitter change: 2026 FS − 2025 FO (starts) — chase,0.0074,True,False,31
+S1 / H3-H4,Gap: 2025 relief − 2025 start (FO) — FF-splitter gap,0.0628,False,False,31
+S1 / H3-H4,Gap: 2026 start FS − 2025 start FO — FF-splitter gap,0.0001,True,True,31
+S3 / H2-H5,H2 Sasaki−Yamamoto TTO3 penalty (2025+26),0.816,False,False,12
+S3 / H2-H5,H2 Sasaki−Yamamoto TTO3 penalty (2026),0.5684,False,False,12
+S3 / H2-H5,H5a sasaki FF velo 5 vs 6+ days off,0.6096,False,False,12
+S3 / H2-H5,H5a sasaki xwOBA 5 vs 6+ days off,0.6044,False,False,12
+S3 / H2-H5,H5a yamamoto FF velo 5 vs 6+ days off,0.3228,False,False,12
+S3 / H2-H5,H5a yamamoto xwOBA 5 vs 6+ days off,0.8328,False,False,12
+S3 / H2-H5,H5b sasaki 2025 FF velo slope,0.0034,True,True,12
+S3 / H2-H5,H5b sasaki 2026 FF velo slope,0.0048,True,False,12
+S3 / H2-H5,H5b yamamoto 2024 FF velo slope,0.26,False,False,12
+S3 / H2-H5,H5b yamamoto 2025 FF velo slope,0.0102,True,False,12
+S3 / H2-H5,H5b yamamoto 2026 FF velo slope,0.059,False,False,12
+S3 / H2-H5,H5c Sasaki−Yamamoto FF velo drop (76+ vs 1-25),0.965,False,False,12

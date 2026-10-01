@@ -16,8 +16,9 @@ for y in [2024, 2025, 2026]:
 "
 fi
 
-for nb in notebooks/0[1-5]_*.ipynb; do
+for nb in notebooks/0[1-7]_*.ipynb; do
   echo "running $nb"
   uv run jupyter nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=1800 "$nb" 2>&1 | tail -1
 done
-echo "done: figures/ and data/processed/ regenerated"
+uv run python scripts/export_ledger.py > /dev/null
+echo "done: figures/, data/processed/ and predictions/ledger.json regenerated"

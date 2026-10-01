@@ -1,0 +1,24 @@
+[
+  {
+    "id": "2026-postseason",
+    "title": "2026 postseason",
+    "file": "predictions/2026_postseason.md",
+    "prediction": "For the upcoming postseason I predict that Sasaki will maintain the same performance that he had as a closer in the 2025 postseason run. Though Sasaki will likely not function as the team's designated closer, he will still likely remain as a high leverage arm out of the pen for the Dodgers.",
+    "locked_commit": "5bda7f93f3182e794ec4e04fbdd484a70b8ce42e",
+    "locked_at": "2026-10-01T15:31:25-07:00",
+    "status": "pending",
+    "parts": [],
+    "grader": "scripts/grade_postseason.py"
+  },
+  {
+    "id": "2027-season",
+    "title": "2027 season",
+    "file": "predictions/2027_season.md",
+    "prediction": "For 2027 I predict that Sasaki will make his full transition into a starting pitcher for the Dodgers rotation, and in terms of his numbers I believe that he will start 2027 with the same numbers that he had post All-Star break, in which he really looked like the prospect that teams were excited to go after.",
+    "locked_commit": "4b8da412bbae86e78c67bc785f23e0a52d879d38",
+    "locked_at": "2026-10-01T16:05:05-07:00",
+    "status": "pending",
+    "parts": [],
+    "grader": "scripts/grade_2027.py"
+  }
+]

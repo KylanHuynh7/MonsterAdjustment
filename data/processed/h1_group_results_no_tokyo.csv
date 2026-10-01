@@ -1,0 +1,71 @@
+pitcher,group,metric,est,ci_lo,ci_hi,n_low_tier,n_high_tier,low_n
+sasaki,Relief,(a) Putaway%,21.7,15.0,32.4,38,26,LOW N
+sasaki,Relief,(a) 2K whiff% [stuff],21.5,10.0,37.5,19,16,LOW N
+sasaki,Relief,(b) Expansion gap (pts),12.8,0.6,27.9,32,20,LOW N
+sasaki,Relief,(b)  OOZ% 0-2/1-2/2-2,65.9,53.8,80.8,32,20,LOW N
+sasaki,Relief,(b)  OOZ% <2 strikes,53.1,45.0,60.2,83,92,
+sasaki,Relief,(c-i) Waste share,29.7,17.6,47.8,23,12,LOW N
+sasaki,Relief,(c-ii) Chase rate,57.7,40.0,78.1,17,8,LOW N
+sasaki,Relief,(d) 2K walk rate,6.7,0.0,13.6,20,15,LOW N
+sasaki,Relief,(d) Overall BB%,8.1,0.0,16.4,30,31,
+sasaki,Relief,(d) % of walks via 2K,25.0,0.0,33.3,1,4,LOW N
+sasaki,Fresh starter,(a) Putaway%,22.7,15.2,31.9,31,110,
+sasaki,Fresh starter,(a) 2K whiff% [stuff],31.4,19.9,44.6,21,65,LOW N
+sasaki,Fresh starter,(b) Expansion gap (pts),23.2,11.0,33.8,23,84,LOW N
+sasaki,Fresh starter,(b)  OOZ% 0-2/1-2/2-2,72.5,61.1,81.5,23,84,LOW N
+sasaki,Fresh starter,(b)  OOZ% <2 strikes,49.3,43.0,55.9,75,255,
+sasaki,Fresh starter,(c-i) Waste share,12.6,6.0,21.3,18,56,LOW N
+sasaki,Fresh starter,(c-ii) Chase rate,50.5,36.8,65.5,17,45,LOW N
+sasaki,Fresh starter,(d) 2K walk rate,11.7,3.8,21.6,16,46,LOW N
+sasaki,Fresh starter,(d) Overall BB%,9.2,3.3,17.2,25,95,LOW N
+sasaki,Fresh starter,(d) % of walks via 2K,75.0,37.5,100.0,3,6,LOW N
+sasaki,Rest of starts,(a) Putaway%,18.0,15.1,21.1,312,293,
+sasaki,Rest of starts,(a) 2K whiff% [stuff],22.7,18.6,26.8,205,182,
+sasaki,Rest of starts,(b) Expansion gap (pts),9.6,4.3,15.0,267,241,
+sasaki,Rest of starts,(b)  OOZ% 0-2/1-2/2-2,59.4,55.0,63.8,267,241,
+sasaki,Rest of starts,(b)  OOZ% <2 strikes,49.8,46.9,52.3,727,728,
+sasaki,Rest of starts,(c-i) Waste share,21.6,18.0,25.8,162,140,
+sasaki,Rest of starts,(c-ii) Chase rate,53.2,47.7,58.5,129,108,
+sasaki,Rest of starts,(d) 2K walk rate,10.4,7.8,13.4,141,137,
+sasaki,Rest of starts,(d) Overall BB%,10.0,7.8,12.3,259,262,
+sasaki,Rest of starts,(d) % of walks via 2K,55.8,42.9,70.9,25,27,LOW N
+sasaki,All starts,(a) Putaway%,18.2,15.6,21.0,343,403,
+sasaki,All starts,(a) 2K whiff% [stuff],23.3,19.5,27.0,226,247,
+sasaki,All starts,(b) Expansion gap (pts),11.5,6.9,16.1,290,325,
+sasaki,All starts,(b)  OOZ% 0-2/1-2/2-2,61.2,57.5,65.1,290,325,
+sasaki,All starts,(b)  OOZ% <2 strikes,49.7,47.0,52.2,802,983,
+sasaki,All starts,(c-i) Waste share,20.4,16.8,24.6,180,196,
+sasaki,All starts,(c-ii) Chase rate,51.9,46.6,56.8,146,153,
+sasaki,All starts,(d) 2K walk rate,10.6,8.1,13.3,157,183,
+sasaki,All starts,(d) Overall BB%,9.6,7.6,11.8,284,357,
+sasaki,All starts,(d) % of walks via 2K,58.9,47.3,72.0,28,33,LOW N
+yamamoto,Fresh starter,(a) Putaway%,17.0,13.1,21.3,137,356,
+yamamoto,Fresh starter,(a) 2K whiff% [stuff],19.6,14.3,25.6,79,200,
+yamamoto,Fresh starter,(b) Expansion gap (pts),16.6,10.3,23.3,108,284,
+yamamoto,Fresh starter,(b)  OOZ% 0-2/1-2/2-2,61.8,56.6,67.1,108,284,
+yamamoto,Fresh starter,(b)  OOZ% <2 strikes,45.2,41.5,48.8,258,696,
+yamamoto,Fresh starter,(c-i) Waste share,25.9,19.6,32.7,65,180,
+yamamoto,Fresh starter,(c-ii) Chase rate,42.5,34.2,51.6,45,142,
+yamamoto,Fresh starter,(d) 2K walk rate,11.5,7.3,16.3,57,161,
+yamamoto,Fresh starter,(d) Overall BB%,9.0,6.2,12.1,102,246,
+yamamoto,Fresh starter,(d) % of walks via 2K,77.5,56.2,95.8,8,25,LOW N
+yamamoto,Rest of starts,(a) Putaway%,23.3,21.6,25.2,942,968,
+yamamoto,Rest of starts,(a) 2K whiff% [stuff],25.5,22.9,28.3,592,582,
+yamamoto,Rest of starts,(b) Expansion gap (pts),11.4,8.8,13.9,789,806,
+yamamoto,Rest of starts,(b)  OOZ% 0-2/1-2/2-2,59.4,57.1,61.6,789,806,
+yamamoto,Rest of starts,(b)  OOZ% <2 strikes,48.0,46.6,49.4,2156,2253,
+yamamoto,Rest of starts,(c-i) Waste share,15.2,12.9,17.5,470,477,
+yamamoto,Rest of starts,(c-ii) Chase rate,49.3,45.6,53.1,406,397,
+yamamoto,Rest of starts,(d) 2K walk rate,6.8,5.5,8.2,467,461,
+yamamoto,Rest of starts,(d) Overall BB%,6.2,5.1,7.3,817,807,
+yamamoto,Rest of starts,(d) % of walks via 2K,61.0,51.6,70.8,35,65,
+yamamoto,All starts,(a) Putaway%,22.4,20.9,23.9,1079,1324,
+yamamoto,All starts,(a) 2K whiff% [stuff],24.6,22.4,27.0,671,782,
+yamamoto,All starts,(b) Expansion gap (pts),12.3,9.8,14.8,897,1090,
+yamamoto,All starts,(b)  OOZ% 0-2/1-2/2-2,60.0,58.0,61.9,897,1090,
+yamamoto,All starts,(b)  OOZ% <2 strikes,47.6,46.3,48.9,2414,2949,
+yamamoto,All starts,(c-i) Waste share,16.8,14.6,19.1,535,657,
+yamamoto,All starts,(c-ii) Chase rate,48.3,44.9,51.8,451,539,
+yamamoto,All starts,(d) 2K walk rate,7.5,6.3,8.9,524,622,
+yamamoto,All starts,(d) Overall BB%,6.6,5.6,7.7,919,1053,
+yamamoto,All starts,(d) % of walks via 2K,64.6,56.3,73.0,43,90,

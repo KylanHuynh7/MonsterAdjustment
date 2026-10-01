@@ -1,0 +1,13 @@
+test,est,p_boot,meaningful
+H2 Sasaki−Yamamoto TTO3 penalty (2025+26),-0.012309129172345223,0.816,False
+H2 Sasaki−Yamamoto TTO3 penalty (2026),-0.0392353675483578,0.5684,False
+H5a sasaki FF velo 5 vs 6+ days off,0.23087012987012656,0.6096,False
+H5a sasaki xwOBA 5 vs 6+ days off,-0.0171058498171196,0.6044,False
+H5a yamamoto FF velo 5 vs 6+ days off,-0.15643086946683127,0.3228,False
+H5a yamamoto xwOBA 5 vs 6+ days off,-0.003739582881389425,0.8328,False
+H5b sasaki 2025 FF velo slope,-0.3922451240876117,0.0034,True
+H5b sasaki 2026 FF velo slope,0.07276289989072512,0.0048,True
+H5b yamamoto 2024 FF velo slope,0.01815751617198859,0.26,False
+H5b yamamoto 2025 FF velo slope,0.030609987362019902,0.0102,True
+H5b yamamoto 2026 FF velo slope,0.023833439988858025,0.059,False
+H5c Sasaki−Yamamoto FF velo drop (76+ vs 1-25),-0.006399198874674994,0.965,False

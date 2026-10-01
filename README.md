@@ -28,6 +28,8 @@ same team, same pitching coach, same catchers, same NPB-to-MLB path, one MLB yea
 | 1 — Stuff ([spec](s1_design_spec.md), [notebook](notebooks/02_stuff_decomposition.ipynb)) | **H3** velocity loss; **H4** splitter shape | 2025 starter FF (96.0) below the NPB reference band; 2026 starter FF (97.8) not. The 2026 FS is a different, harder pitch than the 2025 FO (+5.4 mph, +5.1 in IVB) |
 | 3 — Role ([spec](s3_design_spec.md), [notebook](notebooks/04_role_question.ipynb)) | **H2** times-through-order penalty; **H5** workload | H2 not supported. H5 rest and within-game fade not meaningful; in-season velocity trend meaningful (2025 −2.75 mph across 8 pre-IL starts; 2026 +1.6 mph) |
 | Exploratory ([notebook](notebooks/05_velocity_exploratory.ipynb)) | Does per-start velocity track per-start results? | Per-start FF velocity vs. xwOBA allowed: r = −0.54 (all 31 starts); r = −0.43 within new-splitter starts only (19), −0.49 with the time trend removed |
+| Exploratory ([notebook](notebooks/07_pitch_value_model.ipynb)) | What is a mph worth on a single pitch? | Holding movement, location and count fixed: four-seam whiff on swings +1.8 pts per mph (Sasaki, CI excludes 0); per-pitch run value and next-day splitter effects not distinguishable from zero |
+| Checks ([notebook](notebooks/06_checks.ipynb)) | Can the results be trusted? | Attack-zone bands reproduce Savant's run values by zone; no H1 verdict changes under three robustness variants; Holm-corrected survivors listed per section |
 
 **Dominant hypothesis (owner's call): H3, specifically fastball velocity.**
 
@@ -43,10 +45,10 @@ same team, same pitching coach, same catchers, same NPB-to-MLB path, one MLB yea
 ```
 data/raw/          Statcast pitch data, MLB Stats API game logs, batter xwOBA (as pulled, unfiltered)
 data/processed/    Result tables written by the notebooks
-notebooks/         01 data first look · 02 stuff (S1) · 03 command (S2/H1) · 04 role (S3) · 05 velocity (exploratory)
+notebooks/         01 first look · 02 stuff (S1) · 03 command (S2/H1) · 04 role (S3) · 05 velocity · 07 pitch model (exploratory) · 06 checks
 figures/           All charts
 scripts/           Data pulls, prediction graders, run_all.sh
-predictions/       Locked forecasts
+predictions/       Locked forecasts + ledger.json (status, locking commit) for the website
 *_design_spec.md   Pre-registered specs per section
 ```
 

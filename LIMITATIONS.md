@@ -8,8 +8,9 @@ What this analysis cannot claim, and why. Each item links back to the decision o
   not tracked data.
 - **Retroactive pitch relabel.** In spring 2026 Statcast renamed Sasaki's original splitter "forkball" (FO) after he
   introduced a new splitter grip (FS). All 2025 data shows FO. Analyses follow Statcast's current labels.
-- **Attack-zone bands are approximated.** Shadow / chase / waste bands are computed from pitch location and batter
-  zone height using Savant's published percentages, not taken from Savant's own field.
+- **Attack-zone bands are approximated, and validated.** Bands are computed from pitch location and batter zone height
+  using Savant's published percentages. Checked against Savant's run value by zone, chase and waste agree within
+  0.25 runs per pitcher-season; heart and shadow within 0.91 (pitches on that boundary). See `notebooks/06_checks.ipynb`.
 - **No league-average benchmarks.** League times-through-order and league velocity-sensitivity comparisons would need
   a full-league pull and were deferred. Yamamoto is the only comparison.
 
@@ -34,11 +35,13 @@ What this analysis cannot claim, and why. Each item links back to the decision o
   "every 5 days" version of H5 can't be tested.
 
 ## Inference
-- **Exploratory analyses.** The per-start velocity checks (notebook 05) were designed after seeing Sections 1–3. They
-  generate hypotheses and don't confirm them.
-- **Multiple comparisons.** Section 1 ran 38 contrasts and Section 3 several more. Some "meaningful" verdicts are
-  expected by chance, and no family-wise correction has been applied yet.
+- **Exploratory analyses.** The per-start velocity checks (notebook 05) and the pitch-level model (notebook 07) were
+  designed after seeing Sections 1–3. They generate hypotheses and don't confirm them. Per-pitch run value is very
+  noisy (R² ≈ 0.03), so the pitch model can only detect large effects.
+- **Multiple comparisons.** Pre-registered verdicts use uncorrected 95% CIs. A Holm check within each section
+  (`notebooks/06_checks.ipynb`) keeps 12 of 16 claimed Section 1 effects and 1 of 3 in Section 3 (only the 2025
+  velocity decline). Results that don't survive should be presented as suggestive.
 - **Thresholds after partial exposure.** Some descriptive velocity and shape numbers were seen before the Section 1
   thresholds were set (disclosed in its spec).
-- **Post-hoc candidates not applied.** The two high-walk Tokyo/March 2025 starts were flagged but kept, per the
-  pre-registration.
+- **Post-hoc candidates not applied.** The two high-walk Tokyo/March 2025 starts were kept, per the pre-registration.
+  Dropping them (robustness check) changes no H1 verdict.

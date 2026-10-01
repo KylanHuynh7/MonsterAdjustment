@@ -10,13 +10,10 @@
 
 1. **Website** (replaces the Quarto writeup). Static site in the style of Variance97, with all numbers precomputed
    at build time.
-2. **Optional strengthening** (from the 2026-10-01 review), owner to pick:
-   - League benchmark: where Sasaki's per-start velocity sensitivity sits among all MLB starters.
-   - Prediction ledger page: each prediction, its commit timestamp, and status.
-   - Small pitch-level run-value model to quantify what velocity is worth.
-   - Robustness page (Tokyo starts excluded, K = 50, tertile hitter tiers).
-   - Multiple-comparison correction across contrasts.
-   - Validate the attack-zone approximation against Savant's published swing/take numbers.
+2. **League benchmark (#2), pending a logistics discussion:** where Sasaki's per-start velocity sensitivity sits
+   among all MLB starters.
+3. Done 2026-10-01: attack-zone validation, robustness variants, Holm correction (notebook 06); pitch-level model
+   (notebook 07); prediction ledger data (`predictions/ledger.json`, page to be built with the site).
 
 ## Dated checkpoints
 
