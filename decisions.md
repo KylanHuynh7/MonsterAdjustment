@@ -71,3 +71,11 @@ Format:
 - **2026-10-01 — Section 1 spec written (`s1_design_spec.md`)** covering contexts, metrics, thresholds, figures and falsification. Disclosure: some velocity and shape numbers were seen before thresholds were set.
 - **2026-10-01 — Section 1 run as specified (`notebooks/02_stuff_decomposition.ipynb`).** Caveat on the results: 2026 relief has only 3 games, so its game-resampled CIs come from very few distinct resamples and are unreliable. Verdicts on 2026-relief contrasts are reported but flagged; none were dropped or changed post hoc.
 - **2026-10-01 — Note: "FO" for 2025 is a retroactive Statcast relabel.** During 2025 Savant called Sasaki's offspeed pitch a split-finger. After he introduced a new splitter grip (~Apr 19–25, 2026), Statcast reclassified the old pitch as a forkball (FO) and tracks the new one as FS. Raw data pulled after the change, so all of 2025 shows FO. Treating FO and FS separately matches Statcast's own split; no change to Section 1 (owner raised this; confirmed via MLB.com / MLBPitchClass).
+
+## Section 3 — Role question (H2, H5). Claude recommendations, applied by default; owner may override.
+
+- **2026-10-01 — Sasaki never started on 4 days off** (11 starts on 5 days off, 14 on 6, 4 on 7+), because the Dodgers used a six-man rotation. H5's "every 5 days" premise can't be tested for him; the rest test is 5 vs. 6+ days off, and starts after more than 10 days off (season start, IL return) are excluded.
+- **2026-10-01 — H2 uses starts only, TTO 1–3** (TTO 4 dropped: Yamamoto only, 20 BF). Primary = 2025+26 pooled; secondary = 2026 only, since the arsenal changed (FS added, SL replaced ST) and "two-pitch" describes 2025 better than 2026.
+- **2026-10-01 — No league-average TTOP benchmark for now.** It would need a full-league Statcast pull (~1.5M pitches per season). Yamamoto is the benchmark, per the doc's reasoning; a league pull can be added later if wanted.
+- **2026-10-01 — Section 3 spec written (`s3_design_spec.md`)** with thresholds, figures and falsification criteria.
+- **2026-10-01 — Section 3 run as specified (`notebooks/04_role_question.ipynb`).** No post-hoc changes. H5(a) per-start rest comparisons are raw (not tier-standardized), as the spec states. H5(b) slopes computed within season; 2025 has 8 starts (pre-IL).
