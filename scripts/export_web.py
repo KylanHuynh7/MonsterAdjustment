@@ -216,6 +216,17 @@ for col, label in [("bip", "Balls in play per PA"), ("k", "Strikeout rate")]:
         draws.append(100 * (bad[col].values[bi].sum() / bad.n.values[bi].sum() - good[col].values[gi].sum() / good.n.values[gi].sum()))
     contact.append({"metric": label, "good": 100 * good[col].sum() / good.n.sum(), "bad": 100 * bad[col].sum() / bad.n.sum(),
                     "diff": obs, "lo": float(np.percentile(draws, 2.5)), "hi": float(np.percentile(draws, 97.5))})
+# four-seam velocity, bad vs. good starts (pitch-weighted per group, bootstrap over starts)
+ffv = sas[(sas.pitch_type == "FF") & (sas.game_type == "R") & (sas.role == "start")].groupby("game_pk").release_speed.agg(["sum", "size"])
+ffv["bad"] = ffv.index.map(logs.set_index("game_pk").runs) >= 3
+good, bad = ffv[~ffv.bad], ffv[ffv.bad]
+obs = bad["sum"].sum() / bad["size"].sum() - good["sum"].sum() / good["size"].sum()
+draws = []
+for _ in range(10_000):
+    gi, bi = rng.integers(0, len(good), len(good)), rng.integers(0, len(bad), len(bad))
+    draws.append(bad["sum"].values[bi].sum() / bad["size"].values[bi].sum() - good["sum"].values[gi].sum() / good["size"].values[gi].sum())
+contact.append({"metric": "Four-seam velocity (mph)", "good": good["sum"].sum() / good["size"].sum(), "bad": bad["sum"].sum() / bad["size"].sum(),
+                "diff": obs, "lo": float(np.percentile(draws, 2.5)), "hi": float(np.percentile(draws, 97.5)), "unit": "mph"})
 
 ledger = json.loads((ROOT / "predictions" / "ledger.json").read_text())
 head = __import__("subprocess").run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True).stdout.strip()
