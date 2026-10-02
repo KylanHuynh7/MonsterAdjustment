@@ -20,5 +20,9 @@ export const takeaways = {
     "he throws harder in relief, and he struggled through a healthy first half of 2026. My read is that he can be a " +
     "quality starter or a high-leverage reliever, and that keeping his velocity up, which depends partly on staying " +
     "healthy, is what decides it.",
-  velocity: "",
+  velocity:
+    "I believe Sasaki needs to hold his fastball at 98+ mph to be a quality starter: his starts at 98.1 mph and " +
+    "above allowed a .263 xwOBA, against .36–.39 below it, and that's the threshold my 2027 projection tests. " +
+    "Against 200 MLB starters, his velocity dependence falls within the normal range, but on the more dependent " +
+    "side — he loses roughly twice as much per mph as the median starter.",
 };
