@@ -130,6 +130,22 @@ export default function CommandPage() {
           { m: "xwOBA on contact", d: fmtRate(num(xw.diff), 3, true), ci: `[${fmtRate(num(xw.diff_lo))}, ${fmtRate(num(xw.diff_hi))}]`, s: fmtSigned(num(xw.std_diff), 2) },
         ]}
       />
+      <h3>More contact, not just harder contact (exploratory)</h3>
+      <DataTable
+        columns={[
+          { key: "m", header: "Per plate appearance" },
+          { key: "g", header: "0–2 run starts", numeric: true },
+          { key: "b", header: "3+ run starts", numeric: true },
+          { key: "d", header: "Difference", numeric: true },
+          { key: "ci", header: "95% CI", numeric: true },
+        ]}
+        rows={h1.contact_exploratory.map((r) => ({
+          m: str(r.metric), g: `${fmt(num(r.good), 1)}%`, b: `${fmt(num(r.bad), 1)}%`, d: fmtSigned(num(r.diff), 1),
+          ci: `[${fmtSigned(num(r.lo), 1)}, ${fmtSigned(num(r.hi), 1)}]`,
+        }))}
+        caption="Added after the pre-registered analysis, to check the project owner's reading of link (e). Bootstrap over starts."
+      />
+
       <Callout kind="caveat" label="Robustness">
         His first two MLB starts (Tokyo, March 2025) were short, high-walk and low-scoring. Dropping them shrinks the
         walk gap to almost nothing but changes no verdict. Neither do two alternative hitter-quality adjustments.

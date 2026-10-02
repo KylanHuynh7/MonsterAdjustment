@@ -200,6 +200,23 @@ for fam, g in mc.groupby("family", sort=False):
     mc_summary.append({"family": fam, "tests": len(g), "claimed": int(g.claimed.sum()),
                        "surviving": int((g.claimed & g.holm_reject).sum()), "expected_fp": round(0.05 * len(g), 1)})
 
+# exploratory (2026-10-02): balls in play and strikeouts per PA, bad vs. good starts
+pa_r = pa[(pa.game_type == "R") & pa.game_pk.isin(app.loc[app.role == "start", "game_pk"]) & (pa.events != "intent_walk")]
+bip = pa_r.groupby("game_pk").agg(n=("events", "size"), bip=("description", lambda x: (x == "hit_into_play").sum()),
+                                  k=("events", lambda e: e.isin(["strikeout", "strikeout_double_play"]).sum()))
+bip["bad"] = bip.index.map(logs.set_index("game_pk").runs) >= 3
+rng = np.random.default_rng(1)
+contact = []
+for col, label in [("bip", "Balls in play per PA"), ("k", "Strikeout rate")]:
+    good, bad = bip[~bip.bad], bip[bip.bad]
+    obs = 100 * (bad[col].sum() / bad.n.sum() - good[col].sum() / good.n.sum())
+    draws = []
+    for _ in range(10_000):
+        gi, bi = rng.integers(0, len(good), len(good)), rng.integers(0, len(bad), len(bad))
+        draws.append(100 * (bad[col].values[bi].sum() / bad.n.values[bi].sum() - good[col].values[gi].sum() / good.n.values[gi].sum()))
+    contact.append({"metric": label, "good": 100 * good[col].sum() / good.n.sum(), "bad": 100 * bad[col].sum() / bad.n.sum(),
+                    "diff": obs, "lo": float(np.percentile(draws, 2.5)), "hi": float(np.percentile(draws, 97.5))})
+
 ledger = json.loads((ROOT / "predictions" / "ledger.json").read_text())
 head = __import__("subprocess").run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True).stdout.strip()
 
@@ -214,6 +231,7 @@ bundle = {
         "contrasts": h1_contrasts.to_dict("records"),
         "link_e": h1_link_e.reset_index().rename(columns={"index": "metric"}).to_dict("records"),
         "starts": h1_starts[["pitcher_name", "date", "runs", "bb_pct", "xwobacon", "bad"]].to_dict("records"),
+        "contact_exploratory": contact,
     },
     "s1": {"velo_ctx": velo_ctx, "splitters": splitters, "contrasts": s1_con.to_dict("records"),
            "movement": mv.to_dict("records"), "yam_movement": ymv.to_dict("records")},

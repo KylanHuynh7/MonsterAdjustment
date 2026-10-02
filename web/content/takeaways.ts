@@ -4,7 +4,10 @@
  */
 export const takeaways = {
   home: "Fastball velocity is the dominant explanation for the gap between Sasaki the closer and Sasaki the starter.",
-  command: "",
+  command:
+    "The data didn't hold up when I tried to show that Sasaki's bad starts come from his walks. In his bad starts, " +
+    "batters put more balls in play and hit them harder — and those starts also came with a slightly slower fastball, " +
+    "which fits the velocity story better than a command one.",
   stuff: "",
   role: "",
   velocity: "",
