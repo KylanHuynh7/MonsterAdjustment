@@ -8,8 +8,8 @@
 
 ## Next
 
-1. **Website** built (`web/`, static Next.js, Dodgers palette). Next: the owner reviews the copy, fills in
-   `web/content/takeaways.ts`, and picks a host (Vercel or GitHub Pages).
+1. **Website live** at https://monster-adjustment.vercel.app (Vercel, auto-deploys on every push to `main`).
+   Next: the owner reviews the copy and fills in `web/content/takeaways.ts`.
 2. Done 2026-10-01: league benchmark (#2), pre-registered in `s8_design_spec.md`, run in notebook 08.
 3. Done 2026-10-01: attack-zone validation, robustness variants, Holm correction (notebook 06); pitch-level model
    (notebook 07); prediction ledger data (`predictions/ledger.json`, page to be built with the site).

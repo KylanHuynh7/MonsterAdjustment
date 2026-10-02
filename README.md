@@ -56,6 +56,8 @@ predictions/       Locked forecasts + ledger.json (status, locking commit) for t
 
 ## Website
 
+**Live: https://monster-adjustment.vercel.app** (redeploys automatically on every push to `main`).
+
 `web/` is a static Next.js site (Dodgers palette) that presents the findings: the puzzle, each section, the
 velocity and league results, the prediction ledger, and the rigor checks. Every number comes from
 `web/public/data.json`, which `scripts/export_web.py` builds from the notebook outputs.
