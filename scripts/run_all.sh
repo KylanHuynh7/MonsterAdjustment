@@ -22,4 +22,6 @@ for nb in notebooks/0[1-8]_*.ipynb; do
   uv run jupyter nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=1800 "$nb" 2>&1 | tail -1
 done
 uv run python scripts/export_ledger.py > /dev/null
-echo "done: figures/, data/processed/ and predictions/ledger.json regenerated"
+uv run python scripts/export_web.py
+echo "done: figures/, data/processed/, predictions/ledger.json and web/public/data.json regenerated"
+echo "build the site with: cd web && npm install && npm run build   (static output in web/out/)"

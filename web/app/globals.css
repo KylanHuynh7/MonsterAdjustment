@@ -1,0 +1,854 @@
+/* ============================================================================
+   The Monster's Adjustment — editorial data-journalism system (Dodgers palette).
+
+   Two type families: a serif for display (headlines, deks, pull quotes) and a
+   sans for everything that has to be read as data — body copy, UI, tables,
+   stat figures, chart labels. Big numbers deliberately stay in the sans; a
+   serif hero figure reads as decoration rather than a measurement.
+
+   Chart colors live here as custom properties so the light/dark steps are
+   declared in one place. Plotly can't read CSS variables, so Plot.tsx resolves
+   these off the document at render time — which means every chart color must
+   be defined on :root, not on a nested selector.
+   ============================================================================ */
+
+:root {
+  /* --- surfaces & ink: Dodger blue on a cool white sheet --- */
+  --paper: #f4f6f9;
+  --surface: #ffffff;
+  --surface-sunk: #e9eef4;
+  --ink: #0a2240;          /* deep Dodger blue — body text */
+  --ink-secondary: #2f4d6e;
+  --ink-muted: #55657a;
+  --rule: #dbe2ea;
+  --rule-strong: #b8c2cc;
+
+  /* --- brand: Dodger blue structural, Dodgers red as the sparing accent --- */
+  --brand: #005a9c;
+  --accent: #ef3e42;
+  --accent-ink: #c8102e;   /* red stepped for text on the light sheet */
+  --link: #005a9c;
+
+  /* --- chart palette (see lib/charts.ts) --- */
+  --c-sasaki: #005a9c;
+  --c-relief: #5fa8dc;
+  --c-yamamoto: #ef3e42;
+  --c-neutral: #a5acaf;
+  --c-band: rgba(165, 172, 175, 0.22);
+  --c-grid: #e3e8ee;
+  --c-axis: #b8c2cc;
+  --c-ink: #0a2240;
+  --c-ink-muted: #55657a;
+  --c-surface: #ffffff;
+
+  /* --- callout tints (Dodgers blue / silver / red family) --- */
+  --tint-note: #e8f1f9;
+  --tint-note-edge: #005a9c;
+  --tint-key: #e6f0fa;
+  --tint-key-edge: #003e74;
+  --tint-warn: #f1f2f3;
+  --tint-warn-edge: #a5acaf;
+  --tint-caveat: #fdecec;
+  --tint-caveat-edge: #ef3e42;
+
+  --safe-l: env(safe-area-inset-left, 0px);
+  --safe-r: env(safe-area-inset-right, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+
+  /* --- masthead: the home-jersey blue, in both themes --- */
+  --bar: #005a9c;
+  --bar-ink: #ffffff;
+  --bar-ink-dim: #cfe0ef;
+  --bar-hover: rgba(255, 255, 255, 0.12);
+
+  --measure: 44rem;
+  --wide: 68rem;
+
+  color-scheme: light;
+}
+
+/* Dark values under both scopes: the media query follows the OS, the
+   [data-theme] scope lets an explicit choice win either way. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+  --paper: #071a33;
+  --surface: #0c2444;
+  --surface-sunk: #10305a;
+  --ink: #eaf0f7;
+  --ink-secondary: #a9c3de;
+  --ink-muted: #8aa2bd;
+  --rule: #173a63;
+  --rule-strong: #23507f;
+
+  --brand: #3d8fd6;
+  --accent: #f2575b;
+  --accent-ink: #ff7b7e;
+  --link: #7db8ea;
+
+  --c-sasaki: #3d8fd6;
+  --c-relief: #9ccbf0;
+  --c-yamamoto: #f2575b;
+  --c-neutral: #8a94a0;
+  --c-band: rgba(138, 148, 160, 0.2);
+  --c-grid: #173a63;
+  --c-axis: #23507f;
+  --c-ink: #eaf0f7;
+  --c-ink-muted: #8aa2bd;
+  --c-surface: #0c2444;
+
+  --bar: #004a82;
+  --bar-ink: #ffffff;
+  --bar-ink-dim: #b9d2ea;
+  --bar-hover: rgba(255, 255, 255, 0.1);
+
+  --tint-note: #0e2d52;
+  --tint-key: #0b2a4d;
+  --tint-warn: #16283e;
+  --tint-caveat: #33191f;
+
+  color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper: #071a33;
+  --surface: #0c2444;
+  --surface-sunk: #10305a;
+  --ink: #eaf0f7;
+  --ink-secondary: #a9c3de;
+  --ink-muted: #8aa2bd;
+  --rule: #173a63;
+  --rule-strong: #23507f;
+
+  --brand: #3d8fd6;
+  --accent: #f2575b;
+  --accent-ink: #ff7b7e;
+  --link: #7db8ea;
+
+  --c-sasaki: #3d8fd6;
+  --c-relief: #9ccbf0;
+  --c-yamamoto: #f2575b;
+  --c-neutral: #8a94a0;
+  --c-band: rgba(138, 148, 160, 0.2);
+  --c-grid: #173a63;
+  --c-axis: #23507f;
+  --c-ink: #eaf0f7;
+  --c-ink-muted: #8aa2bd;
+  --c-surface: #0c2444;
+
+  --bar: #004a82;
+  --bar-ink: #ffffff;
+  --bar-ink-dim: #b9d2ea;
+  --bar-hover: rgba(255, 255, 255, 0.1);
+
+  --tint-note: #0e2d52;
+  --tint-key: #0b2a4d;
+  --tint-warn: #16283e;
+  --tint-caveat: #33191f;
+
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  background: var(--paper);
+  /* Stops iOS inflating type when the phone is rotated to landscape. */
+  -webkit-text-size-adjust: 100%;
+  /* The nav is sticky; keep anchor jumps clear of it. */
+  scroll-padding-top: 5rem;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: color-mix(in srgb, var(--accent) 22%, transparent); }
+
+/* ============================ nav ============================ */
+
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bar);
+  /* A thin red keyline under the blue: the jersey-number red, used sparingly. */
+  border-bottom: 3px solid var(--accent);
+}
+
+.masthead-inner {
+  max-width: var(--wide);
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 3.75rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.wordmark {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--bar-ink);
+  text-decoration: none;
+  white-space: nowrap;
+  display: flex;
+  align-items: baseline;
+  gap: 0.05em;
+}
+.wordmark em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--bar-ink);
+}
+
+.masthead nav {
+  display: flex;
+  align-items: stretch;
+  gap: 0.25rem;
+  margin-left: auto;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.masthead nav::-webkit-scrollbar { display: none; }
+
+.masthead nav a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 0.6rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--bar-ink-dim);
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: 5px;
+}
+.masthead nav a:hover { color: var(--bar-ink); background: var(--bar-hover); }
+
+/* Links had no focus style of their own, so keyboard focus fell back to the
+   UA ring — a dark outline that all but disappears against the navy bar.
+   White on the bar, Dodger blue on the page. */
+.masthead nav a:focus-visible,
+.wordmark:focus-visible {
+  outline: 2px solid var(--bar-ink);
+  outline-offset: 2px;
+}
+a:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.masthead nav a { border-radius: 0; }
+.masthead nav a[aria-current="page"] { color: var(--bar-ink); font-weight: 650; }
+/* The active marker sits on the red keyline, so it reads as a notch in the
+   team stripe rather than a second underline. */
+.masthead nav a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0.4rem;
+  right: 0.4rem;
+  /* Sits inside the bar: the nav scrolls horizontally, and overflow-x clips
+     anything placed below its content box. */
+  bottom: 0;
+  height: 3px;
+  background: var(--bar-ink);
+}
+
+/* ============================ page shell ============================ */
+
+.page {
+  max-width: var(--wide);
+  margin: 0 auto;
+  padding: 3.5rem 2rem 7rem;
+}
+
+/* Prose sits at a reading measure; figures, tables and stat rows break out to
+   the full column. Applied to the text elements themselves so it still holds
+   for content nested inside tab panels. */
+.page :is(p, h1, h2, h3, ul, ol, blockquote, pre.prose) {
+  max-width: var(--measure);
+}
+.page :is(figure, .stat-row, .table-wrap, .controls, .card-row, .tabs) {
+  max-width: none;
+}
+
+/* ============================ headers ============================ */
+
+.kicker {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin: 0 0 1rem;
+}
+
+h1.display {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(2.6rem, 6.2vw, 4.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  margin: 0 0 1.25rem;
+  text-wrap: balance;
+}
+
+.dek {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+  line-height: 1.45;
+  color: var(--ink-secondary);
+  margin: 0 0 2.5rem;
+  text-wrap: pretty;
+}
+
+h2 {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  margin: 3.5rem 0 0.75rem;
+  text-wrap: balance;
+}
+
+h3 {
+  font-family: var(--font-sans), sans-serif;
+  font-weight: 650;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--ink-secondary);
+  margin: 2.5rem 0 0.5rem;
+}
+
+p { margin: 0 0 1.05rem; text-wrap: pretty; }
+
+.lede::first-letter {
+  float: left;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 3.4em;
+  line-height: 0.82;
+  padding: 0.08em 0.08em 0 0;
+  color: var(--brand);
+  font-weight: 600;
+}
+
+a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+strong { font-weight: 650; }
+
+code {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.86em;
+  background: var(--surface-sunk);
+  padding: 0.12em 0.35em;
+  border-radius: 4px;
+}
+
+ul, ol { margin: 0 0 1.15rem; padding-left: 1.2rem; }
+li { margin-bottom: 0.5rem; }
+
+hr.rule {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 3.5rem 0;
+  max-width: none;
+}
+
+/* ============================ figures ============================ */
+
+figure {
+  margin: 2.25rem 0 2.5rem;
+  padding: 0;
+}
+
+figure .figure-head { margin-bottom: 1rem; max-width: var(--measure); }
+
+figure .figure-title {
+  font-family: var(--font-sans), sans-serif;
+  font-weight: 650;
+  font-size: 1rem;
+  line-height: 1.35;
+  margin: 0 0 0.2rem;
+  color: var(--ink);
+}
+
+figure .figure-sub {
+  font-size: 0.86rem;
+  color: var(--ink-secondary);
+  margin: 0;
+}
+
+figure .plot {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 0.75rem 0.5rem 0.5rem;
+  /* Height comes from Plotly's own SVG; the inline min-height only reserves
+     space before it loads. Nothing is clipped here — the chart's own margins
+     are sized to include the axis band. */
+  height: auto !important;
+}
+
+figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--ink-muted);
+  max-width: var(--measure);
+}
+figcaption .fig-no {
+  font-weight: 650;
+  color: var(--ink-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.74rem;
+}
+
+/* Legend rendered in HTML, not by Plotly — keeps it in text tokens. */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 0 0 0.5rem;
+  padding: 0 0.25rem;
+  font-size: 0.82rem;
+  color: var(--ink-secondary);
+  list-style: none;
+}
+.legend li { display: flex; align-items: center; gap: 0.4rem; margin: 0; }
+.legend .swatch {
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+  flex: none;
+}
+
+/* ============================ stats ============================ */
+
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 0;
+  margin: 2rem 0;
+  border-top: 1px solid var(--rule-strong);
+  border-bottom: 1px solid var(--rule);
+}
+
+.stat {
+  padding: 1.1rem 1.25rem 1.15rem 0;
+  border-right: 1px solid var(--rule);
+}
+.stat:last-child { border-right: 0; }
+
+.stat .stat-label {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 0.35rem;
+}
+
+/* Sans, proportional figures — never the serif, never tabular at this size. */
+.stat .stat-value {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 2rem;
+  font-weight: 620;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+.stat .stat-value .unit {
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--ink-muted);
+  margin-left: 0.2rem;
+}
+.stat .stat-note {
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--ink-muted);
+  margin-top: 0.4rem;
+}
+.stat.is-accent .stat-value { color: var(--accent-ink); }
+
+/* ============================ callouts ============================ */
+
+.callout {
+  border-left: 3px solid var(--tint-note-edge);
+  background: var(--tint-note);
+  padding: 1rem 1.25rem;
+  margin: 2rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.94rem;
+  max-width: var(--measure);
+}
+.callout > *:first-child { margin-top: 0; }
+.callout > *:last-child { margin-bottom: 0; }
+.callout .callout-label {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.45rem;
+  color: var(--ink-secondary);
+}
+.callout.key { background: var(--tint-key); border-left-color: var(--tint-key-edge); }
+.callout.warn { background: var(--tint-warn); border-left-color: var(--tint-warn-edge); }
+.callout.caveat { background: var(--tint-caveat); border-left-color: var(--tint-caveat-edge); }
+
+/* ============================ tables ============================ */
+
+.table-wrap { overflow-x: auto; margin: 1.5rem 0 2rem; }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.86rem;
+  font-variant-numeric: tabular-nums;
+}
+caption {
+  text-align: left;
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+  margin-bottom: 0.5rem;
+}
+thead th {
+  text-align: left;
+  font-weight: 650;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  padding: 0 0.9rem 0.5rem 0;
+  border-bottom: 1px solid var(--rule-strong);
+  white-space: nowrap;
+}
+tbody code, thead code { background: none; padding: 0; }
+
+tbody td {
+  padding: 0.55rem 0.9rem 0.55rem 0;
+  border-bottom: 1px solid var(--rule);
+  white-space: nowrap;
+}
+tbody tr:last-child td { border-bottom: 0; }
+td.num, th.num { text-align: right; }
+thead th:last-child, tbody td:last-child { padding-right: 0; }
+
+/* ============================ controls ============================ */
+
+.controls {
+  display: flex;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  margin: 1.75rem 0;
+  padding: 1rem 1.25rem;
+  background: var(--surface-sunk);
+  border-radius: 10px;
+}
+.control { display: flex; flex-direction: column; gap: 0.45rem; }
+.control > .control-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+select {
+  font: inherit;
+  /* Must stay >= 16px: iOS Safari zooms the page when a focused control's text
+     is smaller than that, and the zoom doesn't undo itself on blur. */
+  font-size: 1rem;
+  padding: 0.4rem 2rem 0.4rem 0.65rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 7px;
+  background: var(--surface);
+  color: var(--ink);
+  max-width: 100%;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 1rem) 55%, calc(100% - 0.7rem) 55%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.chips { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.chip {
+  font: inherit;
+  font-size: 0.82rem;
+  padding: 0.32rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--rule-strong);
+  background: transparent;
+  color: var(--ink-secondary);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+.chip:hover { border-color: var(--ink-muted); color: var(--ink); }
+.chip[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+  font-weight: 600;
+}
+.chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ============================ tabs ============================ */
+
+.tabs {
+  display: flex;
+  gap: 1.75rem;
+  border-bottom: 1px solid var(--rule);
+  margin: 2rem 0 0;
+  flex-wrap: wrap;
+}
+.tabs button {
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 500;
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: 0 0 0.7rem;
+  margin-bottom: -1px;
+  cursor: pointer;
+  color: var(--ink-muted);
+}
+.tabs button:hover { color: var(--ink); }
+.tabs button[aria-selected="true"] {
+  color: var(--ink);
+  font-weight: 650;
+  border-bottom-color: var(--accent);
+}
+.tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.tabpanel { padding-top: 0.5rem; }
+
+/* ============================ disclosure ============================ */
+
+details {
+  border-bottom: 1px solid var(--rule);
+  padding: 0.9rem 0;
+  max-width: var(--measure);
+}
+details summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  list-style: none;
+  display: flex;
+  gap: 0.7rem;
+  align-items: baseline;
+}
+details summary::-webkit-details-marker { display: none; }
+details summary::before {
+  content: "+";
+  color: var(--accent);
+  font-weight: 700;
+  flex: none;
+  width: 0.8em;
+}
+details[open] summary::before { content: "\2212"; }
+details summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+details .details-body {
+  padding: 0.7rem 0 0.2rem 1.5rem;
+  font-size: 0.92rem;
+  color: var(--ink-secondary);
+}
+details .details-body p:last-child { margin-bottom: 0; }
+
+/* ============================ cards ============================ */
+
+.card-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.5rem;
+  margin: 1.75rem 0;
+}
+.card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  padding-top: 0.9rem;
+  border-top: 2px solid var(--brand);
+}
+.card-link .card-title {
+  font-family: var(--font-sans), sans-serif;
+  font-weight: 650;
+  font-size: 1rem;
+  margin: 0 0 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.card-link .card-title::after {
+  content: "\2192";
+  color: var(--brand);
+  transition: transform 0.15s;
+}
+.card-link:hover .card-title::after { transform: translateX(3px); }
+.card-link p { font-size: 0.88rem; color: var(--ink-secondary); margin: 0; }
+
+/* ============================ footer ============================ */
+
+.colophon {
+  border-top: 1px solid var(--rule);
+  margin-top: 5rem;
+  padding: 2rem 0 0;
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  max-width: none;
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+.colophon div { max-width: 22rem; }
+.colophon strong {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-secondary);
+  margin-bottom: 0.3rem;
+}
+
+pre {
+  background: var(--surface-sunk);
+  border-radius: 8px;
+  padding: 0.9rem 1.1rem;
+  overflow-x: auto;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  max-width: none;
+}
+pre code { background: none; padding: 0; font-size: inherit; }
+
+/* ============================ responsive ============================ */
+
+@media (max-width: 46rem) {
+  .masthead-inner {
+    padding: 0 calc(1.1rem + var(--safe-r)) 0 calc(1.1rem + var(--safe-l));
+    gap: 1rem;
+  }
+  .page {
+    padding: 2rem calc(1.1rem + var(--safe-r)) calc(4rem + var(--safe-b))
+      calc(1.1rem + var(--safe-l));
+  }
+
+  /* Touch targets: 44px is the iOS minimum, and the desktop nav links are
+     only as tall as their text. */
+  .masthead nav a { min-height: 44px; padding: 0 0.55rem; }
+  .chip { min-height: 44px; display: inline-flex; align-items: center; }
+  select { min-height: 44px; }
+  details summary { min-height: 44px; align-items: center; }
+  .card-link { min-height: 44px; }
+  .tabs button { min-height: 44px; padding-bottom: 0.55rem; }
+  .wordmark { min-height: 44px; align-items: center; }
+
+  /* Inline links inside body copy are intentionally left at text size —
+     WCAG 2.5.8 exempts them, and padding them out would break the line. */
+
+  /* Tabs can outgrow the viewport; let them scroll rather than wrap into a
+     stack that pushes the content down. */
+  .tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    gap: 1.25rem;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tabs button { white-space: nowrap; }
+  h1.display { font-size: clamp(2rem, 9vw, 2.6rem); }
+  .stat-row { grid-template-columns: 1fr 1fr; }
+  .stat { padding-right: 1rem; }
+  .stat:nth-child(2n) { border-right: 0; }
+  .lede::first-letter { font-size: 2.8em; }
+  .controls { gap: 1.1rem; padding: 0.9rem 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ============================ project additions ============================ */
+
+.verdict {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--rule-strong);
+  color: var(--ink-secondary);
+  white-space: nowrap;
+}
+.verdict.yes { background: var(--brand); border-color: var(--brand); color: #fff; }
+.verdict.no { background: transparent; border-color: var(--accent); color: var(--accent-ink); }
+.verdict.open { background: var(--surface-sunk); }
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: 1.25rem;
+  max-width: none;
+}
+.chart-grid figure { margin: 0; }
+
+.ledger { display: grid; gap: 1.5rem; margin: 2rem 0; max-width: none; }
+.ledger-card {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-top: 4px solid var(--brand);
+  border-radius: 10px;
+  padding: 1.4rem 1.5rem 1.2rem;
+}
+.ledger-card blockquote {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.12rem;
+  line-height: 1.5;
+  margin: 0.6rem 0 1rem;
+  color: var(--ink);
+  max-width: var(--measure);
+}
+.ledger-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: 0.82rem; color: var(--ink-muted); }
+.ledger-meta code { font-size: 0.8rem; }
+
+.owner-take {
+  border-left: 3px solid var(--accent);
+  padding: 0.2rem 0 0.2rem 1.1rem;
+  margin: 2rem 0;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.owner-take .callout-label {
+  display: block;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin-bottom: 0.4rem;
+}
+.chart-grid .figure-head { min-height: 3.6rem; }
+.grid-legend { margin: 1.25rem 0 0.75rem; }

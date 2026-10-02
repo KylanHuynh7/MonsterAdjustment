@@ -48,9 +48,22 @@ data/raw/          Statcast pitch data, MLB Stats API game logs, batter xwOBA, l
 data/processed/    Result tables written by the notebooks
 notebooks/         01 first look · 02 stuff (S1) · 03 command (S2/H1) · 04 role (S3) · 05 velocity · 07 pitch model (exploratory) · 06 checks · 08 league benchmark
 figures/           All charts
-scripts/           Data pulls, prediction graders, run_all.sh
+scripts/           Data pulls, prediction graders, web/ledger exporters, run_all.sh
+web/               The project website (static Next.js)
 predictions/       Locked forecasts + ledger.json (status, locking commit) for the website
 *_design_spec.md   Pre-registered specs per section
+```
+
+## Website
+
+`web/` is a static Next.js site (Dodgers palette) that presents the findings: the puzzle, each section, the
+velocity and league results, the prediction ledger, and the rigor checks. Every number comes from
+`web/public/data.json`, which `scripts/export_web.py` builds from the notebook outputs.
+
+```bash
+uv run python scripts/export_web.py   # refresh the site's data
+cd web && npm install && npm run dev  # local preview at http://localhost:3000
+npm run build                         # static site in web/out/
 ```
 
 ## Reproduce
