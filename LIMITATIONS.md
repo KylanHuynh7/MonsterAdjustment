@@ -11,8 +11,9 @@ What this analysis cannot claim, and why. Each item links back to the decision o
 - **Attack-zone bands are approximated, and validated.** Bands are computed from pitch location and batter zone height
   using Savant's published percentages. Checked against Savant's run value by zone, chase and waste agree within
   0.25 runs per pitcher-season; heart and shadow within 0.91 (pitches on that boundary). See `notebooks/06_checks.ipynb`.
-- **No league-average benchmarks.** League times-through-order and league velocity-sensitivity comparisons would need
-  a full-league pull and were deferred. Yamamoto is the only comparison.
+- **League benchmark covers velocity dependence only.** It compares 200 four-seam starters (2025–26) using Savant's
+  per-game summaries, validated against our own Sasaki values. Sinker-first starters are excluded by construction.
+  League times-through-order was not benchmarked; Yamamoto remains the only TTO comparison.
 
 ## Sample size
 - **Relief ceiling:** 14 appearances, 239 pitches, 61 batters faced. Several H1 cells fall below 30 per hitter tier

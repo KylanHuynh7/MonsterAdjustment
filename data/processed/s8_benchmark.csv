@@ -1,0 +1,3 @@
+version,pitchers,league median,league p10,league p90,Sasaki slope,Sasaki r,Sasaki percentile,Sasaki perm p,Yamamoto slope,Yamamoto percentile,observed SD of slopes,est. real SD (beyond noise),verdict
+raw,200,-0.0147,-0.0462,0.016,-0.0314,-0.54,21.6,0.002,-0.0282,25.6,0.0277,0.0126,Typical
+centered,200,-0.0147,-0.0508,0.0231,-0.0375,-0.49,20.1,0.004,-0.0394,17.6,0.0301,0.0144,Typical

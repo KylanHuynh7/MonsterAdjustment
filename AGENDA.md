@@ -10,8 +10,7 @@
 
 1. **Website** (replaces the Quarto writeup). Static site in the style of Variance97, with all numbers precomputed
    at build time.
-2. **League benchmark (#2), pending a logistics discussion:** where Sasaki's per-start velocity sensitivity sits
-   among all MLB starters.
+2. Done 2026-10-01: league benchmark (#2), pre-registered in `s8_design_spec.md`, run in notebook 08.
 3. Done 2026-10-01: attack-zone validation, robustness variants, Holm correction (notebook 06); pitch-level model
    (notebook 07); prediction ledger data (`predictions/ledger.json`, page to be built with the site).
 

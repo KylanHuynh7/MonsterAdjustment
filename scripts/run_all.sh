@@ -9,6 +9,7 @@ uv sync -q
 if [[ "${1:-}" == "--pull" ]]; then
   uv run python scripts/pull_statcast.py
   uv run python scripts/pull_game_logs.py
+  uv run python scripts/pull_league_grouped.py
   uv run python -c "
 from pybaseball import statcast_batter_expected_stats
 for y in [2024, 2025, 2026]:
@@ -16,7 +17,7 @@ for y in [2024, 2025, 2026]:
 "
 fi
 
-for nb in notebooks/0[1-7]_*.ipynb; do
+for nb in notebooks/0[1-8]_*.ipynb; do
   echo "running $nb"
   uv run jupyter nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=1800 "$nb" 2>&1 | tail -1
 done
