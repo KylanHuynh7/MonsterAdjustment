@@ -9,6 +9,7 @@ import { appearances, fitLine, league, num, puzzle, str } from "@/lib/data";
 export default function HomePage() {
   const ps = puzzle.find((l) => l.label === "2025 postseason")!;
   const full = puzzle.find((l) => l.label === "2026 full season")!;
+  const asStarter = puzzle.find((l) => l.label === "2026 as a starter")!;
   const second = puzzle.find((l) => l.label === "2026 second half")!;
   const bench = league.benchmark.find((b) => b.version === "raw")!;
 
@@ -32,7 +33,7 @@ export default function HomePage() {
     <>
       <PageHeader
         kicker="Roki Sasaki · Los Angeles Dodgers · 2025–26"
-        title={<>0.84 in October.<br />4.49 in the rotation.</>}
+        title={<>0.84 in October.<br />{fmt(asStarter.era)} in the rotation.</>}
         dek={<>Same arm, same arsenal, six months apart. This project tests five explanations for the gap, against a matched control who shares his team, his coach and his path from Japan.</>}
       />
 

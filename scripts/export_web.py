@@ -69,6 +69,7 @@ puzzle = [
     line(reg[(reg.season == 2026) & (reg.date > "2026-07-14") & (reg.gamesStarted == 1)], "2026 second half",
          "Starts after the All-Star break"),
     line(reg[reg.season == 2026], "2026 full season", "23 starts, 3 relief outings"),
+    line(reg[(reg.season == 2026) & (reg.gamesStarted == 1)], "2026 as a starter", "Starts only"),
 ]
 
 
