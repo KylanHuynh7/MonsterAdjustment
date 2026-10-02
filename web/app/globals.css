@@ -782,6 +782,26 @@ pre code { background: none; padding: 0; font-size: inherit; }
   .controls { gap: 1.1rem; padding: 0.9rem 1rem; }
 }
 
+/* Phones: the wordmark gets its own row and the section links a full-width,
+   swipeable row beneath it, with a fade on the right edge so it reads as
+   scrollable rather than as a nav with one item. */
+@media (max-width: 46rem) {
+  .masthead-inner {
+    flex-wrap: wrap;
+    height: auto;
+    row-gap: 0;
+    padding-top: 0.55rem;
+  }
+  .wordmark { width: 100%; min-height: 36px; font-size: 1.15rem; }
+  .masthead nav {
+    margin-left: calc(-0.55rem);
+    width: calc(100% + 0.55rem);
+    -webkit-mask-image: linear-gradient(to right, #000 88%, transparent);
+    mask-image: linear-gradient(to right, #000 88%, transparent);
+    padding-right: 3rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }
